@@ -6,11 +6,9 @@ Created on Wed Aug 12 09:54:06 2020
 """
 from mcpi.minecraft import Minecraft
 mc=Minecraft.create()
-while True:
-    hits=mc.events.pollBlockHits()
-    if len(hits)>0:
-        hits=hits[0]
-        x,y,z=hits.pos.x,hits.pos.y,hits.pos.z
-        mc.setBlock(x,y,z,57)
-        block=mc.getBlock(x,y,z)
-        mc.postToChat("恭喜你獵到了"+str(block))
+def plantTree(x,y,z):
+    mc.setBlocks(x-1,y+3,z-1,x+1,y+5,z+1,57)
+    mc.setBlocks(x,y,z,x,y+4,z,17)
+x,y,z=mc.player.getPos()    
+for i in range(10):
+    plantTree(x+i,y,z)
